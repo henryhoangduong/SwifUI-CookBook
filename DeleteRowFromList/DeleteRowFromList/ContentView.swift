@@ -20,11 +20,20 @@ struct ContentView: View {
                     country in Text("\(country)")
                 }
                 .onDelete(perform: deleteItem)
+                .onMove(perform: moveRow)
             }
             .navigationTitle("Countries")
             .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .topBarLeading) {
+                    EditButton()
+                }
+            }
         }
     }
+    private func moveRow(source: IndexSet, destination: Int) {
+         countries.move(fromOffsets: source, toOffset: destination)
+     }
 }
 
 #Preview {
